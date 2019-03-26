@@ -54,7 +54,11 @@ button{
 }
 
 /* notifications */
+
+
+
 .notifications {
+    
     width:30%;
     border:1px solid #f1f1f1;
     display: flex;
@@ -67,6 +71,25 @@ button{
     background:#fff;
     box-shadow: 0 1px 8px rgba(0,0,0,0.25), 0 1px 10px rgba(0,0,0,0.22);
     border-radius:5px;
+    opacity:0;
+    animation-name:anim;
+    animation-delay: 5s;
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+}
+
+@keyframes anim {
+    from {opacity:0}
+
+    to {opacity: 1}
+}
+
+
+
+/* animation */
+
+.notifications_hidden {
+    visibility: hidden;
 }
 
 /* carusel */

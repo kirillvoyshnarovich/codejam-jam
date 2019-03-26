@@ -79,7 +79,7 @@ class Notifications {
         const carusel = this.createCarusel()
         const disable = this.createDisable()
         const control = this.createControl()
-        const close = this.createElement('div', {class:'notifications__close'},"&#9587")//почитать промнемонку, когда вставляю так &#9587- тогда символ не отображаетя
+        const close = this.createElement('button', {class:'notifications__close'})//почитать промнемонку, когда вставляю так &#9587- тогда символ не отображаетя
 
         const notification = this.createElement('div', {class:'notifications'}, carusel, disable, control, close)
         this.scope.appendChild(notification)
@@ -103,14 +103,19 @@ class Notifications {
         })
     }
 
-    handlerClose() {
-        console.log('handlerClose')
+    handlerClose(e) {
+
+        function closeNotifications(e) {
+            console.log(e.keyCode)
+
+                let notifications = document.querySelector('.notifications')
+                notifications.classList.add('notifications_hidden')
+
+        }
+        
         let checkbox = document.querySelector('.notifications__close');
-        checkbox.addEventListener('click', function() {
-            console.log('событие handlerClose')
-            let notifications = document.querySelector('.notifications')
-            notifications.classList.add('notifications_hidden')
-        })
+        checkbox.addEventListener('click', closeNotifications);
+        // checkbox.addEventListener('keyup', closeNotifications);
     }
 
 }
@@ -139,23 +144,27 @@ class Carusel {
     }
 
     handlerButton(button) {
-        button.addEventListener('click', ({ target }) => {
-
-            
+        let handler = (e)=> { 
+            console.log(e.keyCode)     
             let rightValue = parseFloat(this.styleTape.right);
             let currentIndex = Math.round(rightValue/this.stepTransition);
             let newIndex;
 
-            if(target.classList.contains('notifications__control--button-right')) {
+            if(e.target.classList.contains('notifications__control--button-right') || e.keyCode == 39) {
                 newIndex = (currentIndex != this.posts.length-1) ? currentIndex + 1 : currentIndex;
-            } else {
+
+            } else if(e.target.classList.contains('notifications__control--button-left') || e.keyCode == 37) {
                 newIndex = (currentIndex > 0) ? currentIndex - 1 : 0;
+            } else {
+                newIndex = currentIndex
             }
 
             this.tape.style.right = (newIndex)*this.stepTransition+"px";
-            this.activePosition(currentIndex, newIndex)            
-        })
+            this.activePosition(currentIndex, newIndex)  
+        }
 
+        button.addEventListener('click', handler)
+        document.addEventListener('keydown', handler)
     }
 
     activePosition(curr, next) {

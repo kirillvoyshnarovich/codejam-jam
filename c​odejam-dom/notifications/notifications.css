@@ -15,6 +15,14 @@ input[type="checkbox"]:focus{
     outline:2px solid green;
 }
 
+.button:active:focus {
+    border:none;
+}
+  
+/* :active:hover > {
+    visibility: visible;
+} */
+
 /* notifications */
 .notifications {
     width:30%;

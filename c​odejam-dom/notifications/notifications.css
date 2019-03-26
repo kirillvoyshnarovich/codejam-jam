@@ -32,12 +32,10 @@ input[type="checkbox"]:focus{
     opacity: 1;
     transition:right, top 0.5s linear;
     animation-name:animation_display;
-    animation-delay: 0s;
+    animation-delay: 5s;
     animation-duration: 0.5s;
     animation-fill-mode:both;
 }
-
-
 
 
 @keyframes animation_display {

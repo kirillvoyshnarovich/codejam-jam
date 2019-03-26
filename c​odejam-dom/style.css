@@ -42,8 +42,3 @@ main {
     border-right:0;
 }
 
-/* for key control */
-
-.button:active:hover {
-    visibility: hidden;
-}

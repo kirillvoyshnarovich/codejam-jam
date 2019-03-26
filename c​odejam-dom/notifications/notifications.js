@@ -39,12 +39,12 @@ class Notifications {
             }            
         })
 
+
+
         const buttonPrevios = this.createElement('button', {class:'button-control notifications__control--button-left'})
         const buttunNext= this.createElement('button', {class:'button-control notifications__control--button-right'})
         const positionControl = this.createElement('div', {class:"position-notifications"}, controls)
         const control = this.createElement('div', {class:'notifications__control'}, buttonPrevios, positionControl, buttunNext)
-
-        console.log(control)
 
         return control
     }
@@ -55,13 +55,13 @@ class Notifications {
             return this.createElement('p', {class:'position-notifications__post'}, item)
         })
 
-        const caruselWrapper = this.createElement('div', {class:'position-notifications__wrapper'}, posts)
+        let widthWrapper = this.arr.length * 100;
+
+        const caruselWrapper = this.createElement('div', {class:'position-notifications__wrapper', style:`width:${widthWrapper}%`}, posts)
         const caruselHeading = this.createElement('h3', {class:'position-notifications__heading'}, 'Email Tip Of The Day')
 
         const carusel = this.createElement('div', {class:'notifications__carusel'}, caruselHeading, caruselWrapper)
         
-        console.log(carusel)
-
         return carusel;
     }
 
@@ -71,7 +71,6 @@ class Notifications {
 
         const disable = this.createElement('div', {class:'notifications__disable'}, checkbox, label)
 
-        console.log(disable)
         return disable
     }
 
@@ -106,16 +105,13 @@ class Notifications {
     handlerClose(e) {
 
         function closeNotifications(e) {
-            console.log(e.keyCode)
 
-                let notifications = document.querySelector('.notifications')
-                notifications.classList.add('notifications_hidden')
-
+            let notifications = document.querySelector('.notifications')
+            notifications.classList.add('notifications_hidden')
         }
         
         let checkbox = document.querySelector('.notifications__close');
         checkbox.addEventListener('click', closeNotifications);
-        // checkbox.addEventListener('keyup', closeNotifications);
     }
 
 }
@@ -144,8 +140,7 @@ class Carusel {
     }
 
     handlerButton(button) {
-        let handler = (e)=> { 
-            console.log(e.keyCode)     
+        let handler = (e)=> {      
             let rightValue = parseFloat(this.styleTape.right);
             let currentIndex = Math.round(rightValue/this.stepTransition);
             let newIndex;
@@ -171,7 +166,6 @@ class Carusel {
         this.positions[curr].classList.remove('position-notifications__item_active')
         this.positions[next].classList.add('position-notifications__item_active')
     }
-
 }
 
 document.addEventListener("DOMContentLoaded", function() {
